@@ -20,6 +20,7 @@ pluginManagement {
 			name = "Jitpack"
 			setUrl("https://jitpack.io/")
 		}
+        maven("https://maven2.bai.lol")
 		mavenCentral()
 		gradlePluginPortal()
 	}

@@ -19,13 +19,13 @@
 package net.frozenblock.wilderwild.registry;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.frozenblock.wilderwild.WilderConstants;
 import net.frozenblock.wilderwild.block.entity.DisplayLanternBlockEntity;
 import net.frozenblock.wilderwild.block.entity.GeyserBlockEntity;
 import net.frozenblock.wilderwild.block.entity.HangingTendrilBlockEntity;
 import net.frozenblock.wilderwild.block.entity.ScorchedBlockEntity;
 import net.frozenblock.wilderwild.block.entity.StoneChestBlockEntity;
 import net.frozenblock.wilderwild.block.entity.TermiteMoundBlockEntity;
+import net.frozenblock.wilderwild.misc.WilderSharedConstants;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
@@ -44,7 +44,8 @@ public final class RegisterBlockEntities {
 
 	@NotNull
 	private static <T extends BlockEntity> BlockEntityType<T> register(@NotNull String path, @NotNull FabricBlockEntityTypeBuilder.Factory<T> blockEntity, @NotNull Block... blocks) {
-		return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, WilderConstants.id(path), FabricBlockEntityTypeBuilder.create(blockEntity, blocks).build(null));
+		ResourceLocation id = WilderConstants.id(path);
+		return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, id, FabricBlockEntityTypeBuilder.create(blockEntity, blocks).build(id));
 	}
 
 	public static final BlockEntityType<HangingTendrilBlockEntity> HANGING_TENDRIL = register("hanging_tendril", HangingTendrilBlockEntity::new, RegisterBlocks.HANGING_TENDRIL);

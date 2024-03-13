@@ -37,6 +37,9 @@
     "client": [
       "net.frozenblock.wilderwild.WilderWildClient"
     ],
+    "fabric-data-fixer": [
+      "net.frozenblock.wilderwild.datafix.wilderwild.WWDataFixer"
+    ],
     "fabric-gametest": [
       "net.frozenblock.wilderwild.gametest.WWGameTest"
     ],

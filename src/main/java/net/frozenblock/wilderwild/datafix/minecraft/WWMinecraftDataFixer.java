@@ -20,9 +20,9 @@ package net.frozenblock.wilderwild.datafix.minecraft;
 
 import com.mojang.datafixers.schemas.Schema;
 import net.fabricmc.loader.api.ModContainer;
-import net.frozenblock.wilderwild.WilderConstants;
 import net.frozenblock.wilderwild.datafix.minecraft.datafixers.DisplayLanternComponentizationFix;
 import net.frozenblock.wilderwild.datafix.minecraft.datafixers.DisplayLanternItemComponentizationFix;
+import net.frozenblock.wilderwild.misc.WilderSharedConstants;
 import net.minecraft.util.datafix.schemas.NamespacedSchema;
 import org.jetbrains.annotations.NotNull;
 import org.quiltmc.qsl.frozenblock.misc.datafixerupper.api.QuiltDataFixerBuilder;
@@ -42,8 +42,8 @@ public class WWMinecraftDataFixer {
 
 	public static void applyDataFixes(final @NotNull ModContainer mod) {
 		WilderConstants.log("Applying Minecraft-Version-Based DataFixes for Wilder Wild with Data Version " + DATA_VERSION, true);
-		var builder = new QuiltDataFixerBuilder(DATA_VERSION);
-		builder.addSchema(0, QuiltDataFixes.BASE_SCHEMA);
+		var builder = new FabricDataFixerBuilder(DATA_VERSION);
+		builder.addSchema(0, FabricDataFixes.BASE_SCHEMA);
 
 		Schema schemaV2 = builder.addSchema(2, NamespacedSchema::new);
 		SimpleFixes.addBlockRenameFix(builder, "Rename potted_grass to potted_short_grass", WilderConstants.id("potted_grass"), WilderConstants.id("potted_short_grass"), schemaV2);
@@ -52,7 +52,7 @@ public class WWMinecraftDataFixer {
 		builder.addFixer(new DisplayLanternComponentizationFix(schemaV3));
 		builder.addFixer(new DisplayLanternItemComponentizationFix(schemaV3));
 
-		QuiltDataFixes.buildAndRegisterMinecraftFixer(mod, builder);
+		FabricDataFixes.buildAndRegisterFixer(mod, "Minecraft", builder);
 		WilderConstants.log("Minecraft-Version-Specific DataFixes for Wilder Wild have been applied", true);
 	}
 

@@ -22,6 +22,7 @@ plugins {
     id("org.quiltmc.gradle.licenser") version("+")
     id("org.ajoberstar.grgit") version("+")
     id("com.modrinth.minotaur") version("+")
+    id("lol.bai.explosion") version("0.1.0")
     `maven-publish`
     eclipse
     idea
@@ -197,7 +198,11 @@ dependencies {
         }
     })
     modImplementation("net.fabricmc:fabric-loader:$loader_version")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
+    //modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
+    modImplementation(explosion.fabric {
+        local(project.file("libs/fabric-api-0.100.6+local-datafixerupper-2.jar"))
+        local(project.file("libs/fabric-gametest-api-v1-1.3.9+1172e897b3.jar"))
+    })
 
     // FrozenLib
     if (local_frozenlib)

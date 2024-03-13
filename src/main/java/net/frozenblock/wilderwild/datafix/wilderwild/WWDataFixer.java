@@ -21,23 +21,93 @@ package net.frozenblock.wilderwild.datafix.wilderwild;
 import com.mojang.datafixers.schemas.Schema;
 import java.util.Map;
 import net.fabricmc.loader.api.ModContainer;
-import net.frozenblock.wilderwild.WilderConstants;
 import net.frozenblock.wilderwild.datafix.wilderwild.datafixers.DrySandStateFix;
 import net.frozenblock.wilderwild.datafix.wilderwild.datafixers.NematocystStateFix;
 import net.frozenblock.wilderwild.datafix.wilderwild.datafixers.OsseousSculkStateFix;
 import net.frozenblock.wilderwild.datafix.wilderwild.datafixers.ScorchedSandStateFix2;
+import net.frozenblock.wilderwild.misc.WilderSharedConstants;
 import net.minecraft.util.datafix.schemas.NamespacedSchema;
 import org.jetbrains.annotations.NotNull;
 import org.quiltmc.qsl.frozenblock.misc.datafixerupper.api.QuiltDataFixerBuilder;
 import org.quiltmc.qsl.frozenblock.misc.datafixerupper.api.QuiltDataFixes;
 import org.quiltmc.qsl.frozenblock.misc.datafixerupper.api.SimpleFixes;
 
-public class WWDataFixer {
+public class WWDataFixer implements DataFixerEntrypoint {
 	public static final int DATA_VERSION = 18;
 
-	private WWDataFixer() {
-		throw new UnsupportedOperationException("WilderDataFixer contains only static declarations.");
+	@Override
+	public void onRegisterBlockEntities(SchemaRegistry registry, Schema schema) {
+		registry.register(
+			WilderSharedConstants.id("display_lantern"),
+			() -> DSL.optionalFields("Items", DSL.list(References.ITEM_STACK.in(schema)))
+		);
+		registry.register(
+			WilderSharedConstants.id("hanging_tendril"),
+			DSL::remainder
+		);
+		registry.register(
+			WilderSharedConstants.id("scorched_block"),
+			DSL::remainder
+		);
+		registry.register(
+			WilderSharedConstants.id("stone_chest"),
+			() -> DSL.optionalFields("Items", DSL.list(References.ITEM_STACK.in(schema)))
+		);
+		registry.register(
+			WilderSharedConstants.id("termite_mound"),
+			DSL::remainder
+		);
+		registry.register(
+			WilderSharedConstants.id("geyser"),
+			DSL::remainder
+		);
 	}
+
+	@Override
+	public void onRegisterEntities(SchemaRegistry registry, Schema schema) {
+		registry.register(
+			WilderSharedConstants.id("jellyfish"),
+			() -> V100.equipment(schema)
+		);
+		registry.register(
+			WilderSharedConstants.id("ostrich"),
+			() -> V100.equipment(schema)
+		);
+		registry.register(
+			WilderSharedConstants.id("crab"),
+			() -> V100.equipment(schema)
+		);
+		registry.register(
+			WilderSharedConstants.id("firefly"),
+			() -> V100.equipment(schema)
+		);
+		registry.register(
+			WilderSharedConstants.id("tumbleweed"),
+			(string) -> DSL.optionalFields("Items", References.ITEM_STACK.in(schema), V100.equipment(schema))
+		);
+		registry.register(
+			WilderSharedConstants.id("ancient_horn_vibration"),
+			DSL::remainder
+		);
+		registry.register(
+			WilderSharedConstants.id("coconut"),
+			DSL::remainder
+		);
+		registry.register(
+			WilderSharedConstants.id("chest_bubbler"),
+			DSL::remainder
+		);
+		registry.register(
+			WilderSharedConstants.id("sculk_spreader"),
+			DSL::remainder
+		);
+		registry.register(
+			WilderSharedConstants.id("scorched"),
+			() -> V100.equipment(schema)
+		);
+	}
+
+	public static final int DATA_VERSION = 17;
 
 	public static void applyDataFixes(final @NotNull ModContainer mod) {
 		WilderConstants.log("Applying DataFixes for Wilder Wild with Data Version " + DATA_VERSION, true);
@@ -120,5 +190,4 @@ public class WWDataFixer {
 		QuiltDataFixes.buildAndRegisterFixer(mod, builder);
 		WilderConstants.log("DataFixes for Wilder Wild have been applied", true);
 	}
-
 }
