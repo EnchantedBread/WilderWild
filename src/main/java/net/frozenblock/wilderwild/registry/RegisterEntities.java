@@ -31,9 +31,10 @@ import net.frozenblock.wilderwild.entity.Ostrich;
 import net.frozenblock.wilderwild.entity.Scorched;
 import net.frozenblock.wilderwild.entity.SculkSpreadTicker;
 import net.frozenblock.wilderwild.entity.Tumbleweed;
-import net.frozenblock.wilderwild.misc.WilderSharedConstants;
+import net.frozenblock.wilderwild.WilderConstants;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -149,8 +150,9 @@ public final class RegisterEntities {
 	}
 
 	@NotNull
-	private static <E extends Entity, T extends EntityType.Builder<E>> T register(@NotNull String path, @NotNull T entityType) {
+	private static <E extends Entity> EntityType<E> register(@NotNull String path, @NotNull FabricEntityTypeBuilder<E> entityType) {
 		ResourceLocation id = WilderConstants.id(path);
-		return Registry.register(BuiltInRegistries.ENTITY_TYPE, id, entityType.build(id));
+		
+		return Registry.register(BuiltInRegistries.ENTITY_TYPE, id, entityType.build());
 	}
 }
