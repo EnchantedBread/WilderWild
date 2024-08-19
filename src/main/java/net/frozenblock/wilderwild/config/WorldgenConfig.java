@@ -152,6 +152,8 @@ public final class WorldgenConfig {
 		public boolean jungleFlowers = true;
 		@EntrySyncData("jungleBushes")
 		public boolean jungleBushes = true;
+		@EntrySyncData("jungleCattails")
+		public boolean jungleCattails = true;
 		@EntrySyncData("junglePonds")
 		public boolean junglePonds = true;
 		@EntrySyncData("jungleMoss")

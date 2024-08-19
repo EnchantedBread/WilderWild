@@ -79,28 +79,33 @@ public final class WilderVegetationGeneration {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_FLOWERING_WATERLILY.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL.getKey());
-						}
+						boolean canAddCattails = true;
+						canAddCattails = canAddCattails && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.jungleCattails);
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_MUD.getKey());
-						}
+						if (canAddCattails) {
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL.getKey());
+							}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_UNCOMMON)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_UNCOMMON.getKey());
-						}
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_MUD.getKey());
+							}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_UNCOMMON)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_MUD_UNCOMMON.getKey());
-						}
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_UNCOMMON)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_UNCOMMON.getKey());
+							}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_COMMON)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_COMMON.getKey());
-						}
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_UNCOMMON)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_MUD_UNCOMMON.getKey());
+							}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_COMMON)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_MUD_COMMON.getKey());
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_COMMON)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_COMMON.getKey());
+							}
+
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CATTAIL_COMMON)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PATCH_CATTAIL_MUD_COMMON.getKey());
+							}
 						}
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_SEEDING_DANDELION)) {

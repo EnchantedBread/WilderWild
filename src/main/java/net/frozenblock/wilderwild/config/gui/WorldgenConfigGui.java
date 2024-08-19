@@ -395,79 +395,83 @@ public final class WorldgenConfigGui {
 			"modifyJunglePlacement",
 			configInstance
 		);
-
 		var junglePalms = FrozenClothConfig.syncedEntry(
-			entryBuilder.startBooleanToggle(text("jungle_palms"), modifiedJungle.junglePalms)
+			entryBuilder.startBooleanToggle(text("palm_generation"), modifiedJungle.junglePalms)
 				.setDefaultValue(defaultConfig.jungle.junglePalms)
 				.setSaveConsumer(newValue -> jungle.junglePalms = newValue)
-				.setTooltip(tooltip("jungle_palms"))
+				.setTooltip(tooltip("palm_generation"))
 				.requireRestart()
 				.build(),
 			jungle.getClass(),
 			"junglePalms",
 			configInstance
 		);
-
 		var jungleFallenTrees = FrozenClothConfig.syncedEntry(
-			entryBuilder.startBooleanToggle(text("jungle_fallen_trees"), modifiedJungle.jungleFallenTrees)
+			entryBuilder.startBooleanToggle(text("fallen_trees"), modifiedJungle.jungleFallenTrees)
 				.setDefaultValue(defaultConfig.jungle.jungleFallenTrees)
 				.setSaveConsumer(newValue -> jungle.jungleFallenTrees = newValue)
-				.setTooltip(tooltip("jungle_fallen_trees"))
+				.setTooltip(tooltip("fallen_trees"))
 				.requireRestart()
 				.build(),
 			jungle.getClass(),
 			"jungleFallenTrees",
 			configInstance
 		);
-
 		var jungleFlowers = FrozenClothConfig.syncedEntry(
-			entryBuilder.startBooleanToggle(text("jungle_flowers"), modifiedJungle.jungleFlowers)
+			entryBuilder.startBooleanToggle(text("flower_generation"), modifiedJungle.jungleFlowers)
 				.setDefaultValue(defaultConfig.jungle.jungleFlowers)
 				.setSaveConsumer(newValue -> jungle.jungleFlowers = newValue)
-				.setTooltip(tooltip("jungle_flowers"))
+				.setTooltip(tooltip("flower_generation"))
 				.requireRestart()
 				.build(),
 			jungle.getClass(),
 			"jungleFlowers",
 			configInstance
 		);
-
 		var jungleBushes = FrozenClothConfig.syncedEntry(
-			entryBuilder.startBooleanToggle(text("jungle_bushes"), modifiedJungle.jungleBushes)
+			entryBuilder.startBooleanToggle(text("bush_generation"), modifiedJungle.jungleBushes)
 				.setDefaultValue(defaultConfig.jungle.jungleBushes)
 				.setSaveConsumer(newValue -> jungle.jungleBushes = newValue)
-				.setTooltip(tooltip("jungle_bushes"))
+				.setTooltip(tooltip("bush_generation"))
 				.requireRestart()
 				.build(),
 			jungle.getClass(),
 			"jungleBushes",
 			configInstance
 		);
-
+		var jungleCattails = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("cattail_generation"), modifiedJungle.jungleCattails)
+				.setDefaultValue(defaultConfig.jungle.jungleCattails)
+				.setSaveConsumer(newValue -> jungle.jungleCattails = newValue)
+				.setTooltip(tooltip("cattail_generation"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"jungleCattails",
+			configInstance
+		);
 		var junglePonds = FrozenClothConfig.syncedEntry(
-			entryBuilder.startBooleanToggle(text("jungle_ponds"), modifiedJungle.junglePonds)
+			entryBuilder.startBooleanToggle(text("pond_generation"), modifiedJungle.junglePonds)
 				.setDefaultValue(defaultConfig.jungle.junglePonds)
 				.setSaveConsumer(newValue -> jungle.junglePonds = newValue)
-				.setTooltip(tooltip("jungle_ponds"))
+				.setTooltip(tooltip("pond_generation"))
 				.requireRestart()
 				.build(),
 			jungle.getClass(),
 			"junglePonds",
 			configInstance
 		);
-
 		var jungleMoss = FrozenClothConfig.syncedEntry(
-			entryBuilder.startBooleanToggle(text("jungle_moss"), modifiedJungle.jungleMoss)
+			entryBuilder.startBooleanToggle(text("moss_generation"), modifiedJungle.jungleMoss)
 				.setDefaultValue(defaultConfig.jungle.jungleMoss)
 				.setSaveConsumer(newValue -> jungle.jungleMoss = newValue)
-				.setTooltip(tooltip("jungle_moss"))
+				.setTooltip(tooltip("moss_generation"))
 				.requireRestart()
 				.build(),
 			jungle.getClass(),
 			"jungleMoss",
 			configInstance
 		);
-
 		var jungleFireflies = FrozenClothConfig.syncedEntry(
 			entryBuilder.startBooleanToggle(text("jungle_fireflies"), modifiedJungle.jungleFireflies)
 				.setDefaultValue(defaultConfig.jungle.jungleFireflies)
@@ -483,7 +487,7 @@ public final class WorldgenConfigGui {
 		var jungleCategory = FrozenClothConfig.createSubCategory(entryBuilder, category, text("jungle"),
 			false,
 			tooltip("jungle"),
-			modifyJunglePlacement, junglePalms, jungleFallenTrees, jungleFlowers, jungleBushes, junglePonds, jungleMoss, jungleFireflies
+			modifyJunglePlacement, junglePalms, jungleFallenTrees, jungleFlowers, jungleBushes, jungleCattails, junglePonds, jungleMoss, jungleFireflies
 		);
 
 		var cherryGrove = FrozenClothConfig.syncedEntry(
