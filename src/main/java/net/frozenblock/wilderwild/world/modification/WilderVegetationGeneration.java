@@ -22,6 +22,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.frozenblock.wilderwild.WilderConstants;
 import net.frozenblock.wilderwild.config.WorldgenConfig;
 import net.frozenblock.wilderwild.tag.WilderBiomeTags;
@@ -36,7 +37,10 @@ public final class WilderVegetationGeneration {
 			.add(ModificationPhase.ADDITIONS,
 				BiomeSelectors.all(),
 				(biomeSelectionContext, context) -> {
-					if (WorldgenConfig.get().flowerGeneration) {
+				boolean canAdd = true;
+				canAdd = canAdd && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.jungleFlowers);
+
+					if (WorldgenConfig.get().flowerGeneration && canAdd) {
 						BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_CARNATION)) {

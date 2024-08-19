@@ -56,6 +56,9 @@ public final class WorldgenConfig {
 	);
 
 	@CollapsibleObject
+	public final Jungle jungle = new Jungle();
+
+	@CollapsibleObject
 	public final BiomeGeneration biomeGeneration = new BiomeGeneration();
 
 	@CollapsibleObject
@@ -73,8 +76,11 @@ public final class WorldgenConfig {
 	@EntrySyncData("snappedTrees")
 	public boolean snappedTrees = true;
 
-	@EntrySyncData("treeGeneration")
-	public boolean treeGeneration = true;
+	@EntrySyncData("modifiedVanillaTrees")
+	public boolean modifiedVanillaTrees = true;
+
+	@EntrySyncData("wilderWildTrees")
+	public boolean wilderWildTrees = true;
 
 	@EntrySyncData("grassGeneration")
 	public boolean grassGeneration = true;
@@ -135,12 +141,22 @@ public final class WorldgenConfig {
 		return INSTANCE.configWithSync();
 	}
 
+	public static class Jungle {
+		@EntrySyncData("modifyJunglePlacement")
+		public boolean modifyJunglePlacement = true;
+		@EntrySyncData("junglePalms")
+		public boolean junglePalms = true;
+		@EntrySyncData("jungleFallenTrees")
+		public boolean jungleFallenTrees = true;
+		@EntrySyncData("jungleFlowers")
+		public boolean jungleFlowers = true;
+		@EntrySyncData("jungleFireflies")
+		public boolean jungleFireflies = true;
+	}
+
 	public static class BiomePlacement {
 		@EntrySyncData("modifyWindsweptSavannaPlacement")
 		public boolean modifyWindsweptSavannaPlacement = true;
-
-		@EntrySyncData("modifyJunglePlacement")
-		public boolean modifyJunglePlacement = true;
 
 		@EntrySyncData("modifySwampPlacement")
 		public boolean modifySwampPlacement = true;

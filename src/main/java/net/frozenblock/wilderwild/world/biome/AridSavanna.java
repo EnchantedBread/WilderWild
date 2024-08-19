@@ -140,7 +140,7 @@ public class AridSavanna extends FrozenBiome {
 
 	@Override
 	public void addFeatures(@NotNull BiomeGenerationSettings.Builder features) {
-		features.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.ARID_SAVANNA_TREES.getKey());
+		features.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.ARID_SAVANNA_TREES_VANILLA.getKey());
 		WilderSharedWorldgen.addBasicFeatures(features, false);
 		BiomeDefaultFeatures.addSavannaGrass(features);
 		BiomeDefaultFeatures.addDefaultOres(features);

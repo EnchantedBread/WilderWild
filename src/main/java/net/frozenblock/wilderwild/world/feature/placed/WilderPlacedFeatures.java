@@ -117,7 +117,11 @@ public final class WilderPlacedFeatures {
 	public static final FrozenPlacedFeature TREES_MEADOW = register("trees_meadow");
 	public static final FrozenPlacedFeature WINDSWEPT_SAVANNA_TREES = register("windswept_savanna_trees");
 	public static final FrozenPlacedFeature SAVANNA_TREES = register("savanna_trees");
+	public static final FrozenPlacedFeature SAVANNA_TREES_NO_BAOBAB = register("savanna_trees_no_baobab");
 	public static final FrozenPlacedFeature ARID_SAVANNA_TREES = register("arid_savanna_trees");
+	public static final FrozenPlacedFeature ARID_SAVANNA_TREES_NO_BAOBAB = register("arid_savanna_trees_no_baobab");
+	public static final FrozenPlacedFeature ARID_SAVANNA_TREES_NO_PALM = register("arid_savanna_trees_no_palm");
+	public static final FrozenPlacedFeature ARID_SAVANNA_TREES_VANILLA = register("arid_savanna_trees_vanilla");
 	public static final FrozenPlacedFeature WOODED_BADLANDS_TREES = register("wooded_badlands_trees");
 	public static final FrozenPlacedFeature TREES_SWAMP = register("trees_swamp");
 	public static final FrozenPlacedFeature MIXED_TREES = register("mixed_trees");
@@ -606,7 +610,23 @@ public final class WilderPlacedFeatures {
 			treePlacement(PlacementUtils.countExtra(1, 0.1F, 1))
 		);
 
+		SAVANNA_TREES_NO_BAOBAB.makeAndSetHolder(WilderConfiguredFeatures.SAVANNA_TREES_NO_BAOBAB.getHolder(),
+			treePlacement(PlacementUtils.countExtra(1, 0.1F, 1))
+		);
+
 		ARID_SAVANNA_TREES.makeAndSetHolder(WilderConfiguredFeatures.ARID_SAVANNA_TREES.getHolder(),
+			treePlacement(RarityFilter.onAverageOnceEvery(12))
+		);
+
+		ARID_SAVANNA_TREES_NO_BAOBAB.makeAndSetHolder(WilderConfiguredFeatures.ARID_SAVANNA_TREES_NO_BAOBAB.getHolder(),
+			treePlacement(RarityFilter.onAverageOnceEvery(12))
+		);
+
+		ARID_SAVANNA_TREES_NO_PALM.makeAndSetHolder(WilderConfiguredFeatures.ARID_SAVANNA_TREES_NO_PALM.getHolder(),
+			treePlacement(RarityFilter.onAverageOnceEvery(12))
+		);
+
+		ARID_SAVANNA_TREES_VANILLA.makeAndSetHolder(WilderConfiguredFeatures.ARID_SAVANNA_TREES_VANILLA.getHolder(),
 			treePlacement(RarityFilter.onAverageOnceEvery(12))
 		);
 

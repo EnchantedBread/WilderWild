@@ -22,6 +22,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.frozenblock.wilderwild.WilderConstants;
 import net.frozenblock.wilderwild.config.WorldgenConfig;
 import net.frozenblock.wilderwild.registry.RegisterWorldgen;
@@ -159,7 +160,10 @@ public final class WilderTreesGeneration {
 			.add(ModificationPhase.ADDITIONS,
 				BiomeSelectors.all(),
 				(biomeSelectionContext, context) -> {
-					if (WorldgenConfig.get().fallenTrees) {
+					boolean canAdd = true;
+					canAdd = canAdd && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.jungleFallenTrees);
+
+					if (WorldgenConfig.get().fallenTrees && canAdd) {
 						BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_FALLEN_BIRCH_TREES)) {
@@ -255,7 +259,11 @@ public final class WilderTreesGeneration {
 						}
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_FALLEN_OAK_AND_CYPRESS_TREES)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.FALLEN_OAK_AND_CYPRESS_PLACED.getKey());
+							if (WorldgenConfig.get().wilderWildTrees) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.FALLEN_OAK_AND_CYPRESS_PLACED.getKey());
+							} else  {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.FALLEN_OAK_AND_SPRUCE_PLACED.getKey());
+							}
 						}
 
 						if (biomeSelectionContext.getBiomeKey().equals(RegisterWorldgen.MIXED_FOREST)) {
@@ -280,19 +288,22 @@ public final class WilderTreesGeneration {
 			.add(ModificationPhase.ADDITIONS,
 				BiomeSelectors.all(),
 				(biomeSelectionContext, context) -> {
-					if (WorldgenConfig.get().treeGeneration) {
+					if (WorldgenConfig.get().modifiedVanillaTrees) {
 						BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
-						if (biomeSelectionContext.getBiomeKey().equals(Biomes.SPARSE_JUNGLE)) {
+						boolean junglePalms = WorldgenConfig.get().jungle.junglePalms;
+						if (biomeSelectionContext.getBiomeKey().equals(Biomes.SPARSE_JUNGLE) && junglePalms) {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PALM.getKey());
 						}
 
-						if (biomeSelectionContext.getBiomeKey().equals(Biomes.JUNGLE)) {
+						if (biomeSelectionContext.getBiomeKey().equals(Biomes.JUNGLE) && junglePalms) {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PALM_JUNGLE.getKey());
 						}
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_PALMS)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PALM_RARE.getKey());
+							if (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || junglePalms) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.PALM_RARE.getKey());
+							}
 						}
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_WARM_BEACH_PALMS)) {

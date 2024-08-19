@@ -18,27 +18,43 @@
 
 package net.frozenblock.wilderwild.world.modification;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.frozenblock.lib.mobcategory.api.FrozenMobCategories;
 import net.frozenblock.wilderwild.WilderConstants;
+import net.frozenblock.wilderwild.config.WorldgenConfig;
 import net.frozenblock.wilderwild.registry.RegisterEntities;
 import net.frozenblock.wilderwild.tag.WilderBiomeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public final class WilderSpawns {
 
 	public static void addFireflies() {
-		BiomeModifications.addSpawn(BiomeSelectors.tag(WilderBiomeTags.FIREFLY_SPAWNABLE_DURING_DAY),
-			FrozenMobCategories.getCategory(WilderConstants.MOD_ID, "fireflies"), RegisterEntities.FIREFLY, 2, 1, 2);
+		BiomeModifications.create(WilderConstants.id("fireflies"))
+			.add(ModificationPhase.ADDITIONS,
+				BiomeSelectors.all(),
+				(biomeSelectionContext, context) -> {
+				BiomeModificationContext.SpawnSettingsContext spawnSettingsContext = context.getSpawnSettings();
+				boolean canAdd = biomeSelectionContext.hasTag(WilderBiomeTags.FIREFLY_SPAWNABLE)
+					|| biomeSelectionContext.hasTag(WilderBiomeTags.FIREFLY_SPAWNABLE_CAVE)
+					|| biomeSelectionContext.hasTag(WilderBiomeTags.FIREFLY_SPAWNABLE_DURING_DAY);
+				canAdd = canAdd && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.jungleFireflies);
 
-		BiomeModifications.addSpawn(BiomeSelectors.tag(WilderBiomeTags.FIREFLY_SPAWNABLE_CAVE),
-			FrozenMobCategories.getCategory(WilderConstants.MOD_ID, "fireflies"), RegisterEntities.FIREFLY, 2, 1, 2);
+				if (canAdd) {
+					spawnSettingsContext.addSpawn(
+						FrozenMobCategories.getCategory(WilderConstants.MOD_ID, "fireflies"),
+						new MobSpawnSettings.SpawnerData(
+							RegisterEntities.FIREFLY, 2, 1, 2)
+					);
+				}
 
-		BiomeModifications.addSpawn(BiomeSelectors.tag(WilderBiomeTags.FIREFLY_SPAWNABLE),
-			FrozenMobCategories.getCategory(WilderConstants.MOD_ID, "fireflies"), RegisterEntities.FIREFLY, 2, 1, 2);
+			});
 	}
 
 	public static void addJellyfish() {

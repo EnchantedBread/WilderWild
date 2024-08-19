@@ -162,7 +162,7 @@ public final class AridForest extends FrozenBiome {
 	@Override
 	public void injectToOverworld(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> parameters) {
 		if (WorldgenConfig.get().biomeGeneration.generateAridForest) {
-			Climate.Parameter humidity = WorldgenConfig.get().biomePlacement.modifyJunglePlacement ? HUMIDITY_MODIFIED_JUNGLE : HUMIDITY;
+			Climate.Parameter humidity = WorldgenConfig.get().jungle.modifyJunglePlacement ? HUMIDITY_MODIFIED_JUNGLE : HUMIDITY;
 			for (Climate.ParameterPoint point : OverworldBiomeBuilderParameters.points(Biomes.DESERT)) {
 				this.addSurfaceBiome(
 					parameters,

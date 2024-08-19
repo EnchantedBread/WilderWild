@@ -124,8 +124,12 @@ public final class WilderConfiguredFeatures {
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_WINDSWEPT_HILLS = WilderFeatureUtils.register("trees_windswept_hills");
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> MEADOW_TREES = WilderFeatureUtils.register("meadow_trees");
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> SAVANNA_TREES = WilderFeatureUtils.register("savanna_trees");
+	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> SAVANNA_TREES_NO_BAOBAB = WilderFeatureUtils.register("savanna_trees_no_baobab");
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> WINDSWEPT_SAVANNA_TREES = WilderFeatureUtils.register("windswept_savanna_trees");
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> ARID_SAVANNA_TREES = WilderFeatureUtils.register("arid_savanna_trees");
+	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> ARID_SAVANNA_TREES_NO_BAOBAB = WilderFeatureUtils.register("arid_savanna_trees_no_baobab");
+	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> ARID_SAVANNA_TREES_NO_PALM = WilderFeatureUtils.register("arid_savanna_trees_no_palm");
+	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> ARID_SAVANNA_TREES_VANILLA = WilderFeatureUtils.register("arid_savanna_trees_vanilla");
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> PARCHED_FOREST_TREES = WilderFeatureUtils.register("parched_forest_trees");
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> ARID_FOREST_TREES = WilderFeatureUtils.register("arid_forest_trees");
 	public static final FrozenConfiguredFeature<RandomFeatureConfiguration, ConfiguredFeature<RandomFeatureConfiguration, ?>> CYPRESS_WETLANDS_TREES = WilderFeatureUtils.register("cypress_wetlands_trees");
@@ -855,6 +859,13 @@ public final class WilderConfiguredFeatures {
 			)
 		);
 
+		SAVANNA_TREES_NO_BAOBAB.makeAndSetHolder(Feature.RANDOM_SELECTOR,
+			new RandomFeatureConfiguration(List.of(
+				new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED), 0.8F)
+			), WilderTreePlaced.OAK_CHECKED.getHolder()
+			)
+		);
+
 		WINDSWEPT_SAVANNA_TREES.makeAndSetHolder(Feature.RANDOM_SELECTOR,
 			new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED), 0.8F)), WilderTreePlaced.OAK_CHECKED.getHolder())
 		);
@@ -866,6 +877,30 @@ public final class WilderConfiguredFeatures {
 				new WeightedPlacedFeature(WilderTreePlaced.BAOBAB.getHolder(), 0.065F),
 				new WeightedPlacedFeature(WilderTreePlaced.SMALL_WINE_PALM_CHECKED.getHolder(), 0.052F),
 				new WeightedPlacedFeature(WilderTreePlaced.BAOBAB_TALL.getHolder(), 0.02F)), placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED)
+			)
+		);
+
+		ARID_SAVANNA_TREES_NO_BAOBAB.makeAndSetHolder(Feature.RANDOM_SELECTOR,
+			new RandomFeatureConfiguration(List.of(
+				new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED), 0.8F),
+				new WeightedPlacedFeature(WilderTreePlaced.OAK_CHECKED.getHolder(), 0.08F),
+				new WeightedPlacedFeature(WilderTreePlaced.SMALL_WINE_PALM_CHECKED.getHolder(), 0.052F)), placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED)
+			)
+		);
+
+		ARID_SAVANNA_TREES_NO_PALM.makeAndSetHolder(Feature.RANDOM_SELECTOR,
+			new RandomFeatureConfiguration(List.of(
+				new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED), 0.8F),
+				new WeightedPlacedFeature(WilderTreePlaced.OAK_CHECKED.getHolder(), 0.08F),
+				new WeightedPlacedFeature(WilderTreePlaced.BAOBAB.getHolder(), 0.065F),
+				new WeightedPlacedFeature(WilderTreePlaced.BAOBAB_TALL.getHolder(), 0.02F)), placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED)
+			)
+		);
+
+		ARID_SAVANNA_TREES_VANILLA.makeAndSetHolder(Feature.RANDOM_SELECTOR,
+			new RandomFeatureConfiguration(List.of(
+				new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED), 0.8F),
+				new WeightedPlacedFeature(WilderTreePlaced.OAK_CHECKED.getHolder(), 0.08F)), placedFeatures.getOrThrow(TreePlacements.ACACIA_CHECKED)
 			)
 		);
 

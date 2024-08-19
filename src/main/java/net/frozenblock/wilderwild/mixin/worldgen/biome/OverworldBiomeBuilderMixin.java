@@ -60,7 +60,7 @@ public final class OverworldBiomeBuilderMixin {
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void wilderWild$injectBiomes(CallbackInfo info) {
-		if (WorldgenConfig.get().biomePlacement.modifyJunglePlacement) {
+		if (WorldgenConfig.get().jungle.modifyJunglePlacement) {
 			MIDDLE_BIOMES_VARIANT[4][3] = Biomes.JUNGLE;
 			MIDDLE_BIOMES[4][4] = Biomes.JUNGLE;
 		}
@@ -117,7 +117,7 @@ public final class OverworldBiomeBuilderMixin {
 		if (biomeKey.equals(Biomes.RIVER) && WorldgenConfig.get().biomeGeneration.generateWarmRiver) {
 			temperature = WarmRiver.UNFROZEN_NOT_WARM_RANGE;
 			operation.call(instance, consumer, this.temperatures[3], WarmRiver.HUMIDITY_TO_TWO, continentalness, erosion, depth, weirdness, RegisterWorldgen.WARM_RIVER);
-			Climate.Parameter jungleHumidity = WorldgenConfig.get().biomePlacement.modifyJunglePlacement ? WarmRiver.HUMIDITY_TO_THREE : humidity;
+			Climate.Parameter jungleHumidity = WorldgenConfig.get().jungle.modifyJunglePlacement ? WarmRiver.HUMIDITY_TO_THREE : humidity;
 			operation.call(instance, consumer, this.temperatures[4], jungleHumidity, continentalness, erosion, depth, weirdness, RegisterWorldgen.WARM_RIVER);
 		}
 		operation.call(instance, consumer, temperature, humidity, continentalness, erosion, depth, weirdness, biomeKey);

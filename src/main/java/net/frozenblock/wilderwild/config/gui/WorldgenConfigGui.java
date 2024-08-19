@@ -380,6 +380,76 @@ public final class WorldgenConfigGui {
 			snowyDyingForest, snowyDyingMixedForest, sparseBirchJungle, temperateRainforest, warmBeach, warmRiver
 		);
 
+		var jungle = config.jungle;
+		var modifiedJungle = modifiedConfig.jungle;
+
+		var modifyJunglePlacement = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("modify_jungle_placement"), modifiedJungle.modifyJunglePlacement)
+				.setDefaultValue(defaultConfig.jungle.modifyJunglePlacement)
+				.setSaveConsumer(newValue -> jungle.modifyJunglePlacement = newValue)
+				.setYesNoTextSupplier(bool -> text("biome_placement." + bool))
+				.setTooltip(tooltip("modify_jungle_placement"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"modifyJunglePlacement",
+			configInstance
+		);
+
+		var junglePalms = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("jungle_palms"), modifiedJungle.junglePalms)
+				.setDefaultValue(defaultConfig.jungle.junglePalms)
+				.setSaveConsumer(newValue -> jungle.junglePalms = newValue)
+				.setTooltip(tooltip("jungle_palms"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"junglePalms",
+			configInstance
+		);
+
+		var jungleFallenTrees = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("jungle_fallen_trees"), modifiedJungle.jungleFallenTrees)
+				.setDefaultValue(defaultConfig.jungle.jungleFallenTrees)
+				.setSaveConsumer(newValue -> jungle.jungleFallenTrees = newValue)
+				.setTooltip(tooltip("jungle_fallen_trees"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"jungleFallenTrees",
+			configInstance
+		);
+
+		var jungleFlowers = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("jungle_flowers"), modifiedJungle.jungleFlowers)
+				.setDefaultValue(defaultConfig.jungle.jungleFlowers)
+				.setSaveConsumer(newValue -> jungle.jungleFlowers = newValue)
+				.setTooltip(tooltip("jungle_flowers"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"jungleFlowers",
+			configInstance
+		);
+
+		var jungleFireflies = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("jungle_fireflies"), modifiedJungle.jungleFireflies)
+				.setDefaultValue(defaultConfig.jungle.jungleFireflies)
+				.setSaveConsumer(newValue -> jungle.jungleFireflies = newValue)
+				.setTooltip(tooltip("jungle_fireflies"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"jungleFireflies",
+			configInstance
+		);
+
+		var jungleCategory = FrozenClothConfig.createSubCategory(entryBuilder, category, text("jungle"),
+			false,
+			tooltip("jungle"),
+			modifyJunglePlacement, junglePalms, jungleFallenTrees, jungleFlowers, jungleFireflies
+		);
+
 		var cherryGrove = FrozenClothConfig.syncedEntry(
 			entryBuilder.startBooleanToggle(text("modify_cherry_grove_placement"), modifiedBiomePlacement.modifyCherryGrovePlacement)
 				.setDefaultValue(defaultConfig.biomePlacement.modifyCherryGrovePlacement)
@@ -390,18 +460,6 @@ public final class WorldgenConfigGui {
 				.build(),
 			biomePlacement.getClass(),
 			"modifyCherryGrovePlacement",
-			configInstance
-		);
-		var jungle = FrozenClothConfig.syncedEntry(
-			entryBuilder.startBooleanToggle(text("modify_jungle_placement"), modifiedBiomePlacement.modifyJunglePlacement)
-				.setDefaultValue(defaultConfig.biomePlacement.modifyJunglePlacement)
-				.setSaveConsumer(newValue -> biomePlacement.modifyJunglePlacement = newValue)
-				.setYesNoTextSupplier(bool -> text("biome_placement." + bool))
-				.setTooltip(tooltip("modify_jungle_placement"))
-				.requireRestart()
-				.build(),
-			biomePlacement.getClass(),
-			"modifyJunglePlacement",
 			configInstance
 		);
 		var mangroveSwamp = FrozenClothConfig.syncedEntry(
@@ -456,7 +514,7 @@ public final class WorldgenConfigGui {
 		var biomePlacementCategory = FrozenClothConfig.createSubCategory(entryBuilder, category, text("biome_placement"),
 			false,
 			tooltip("biome_placement"),
-			cherryGrove, jungle, mangroveSwamp, stonyShore, swamp, windsweptSavanna
+			cherryGrove, mangroveSwamp, stonyShore, swamp, windsweptSavanna
 		);
 
 		var fallenTrees = category.addEntry(
@@ -550,16 +608,31 @@ public final class WorldgenConfigGui {
 				configInstance
 			)
 		);
-		var treeGeneration = category.addEntry(
+
+		var modifiedVanillaTrees = category.addEntry(
 			FrozenClothConfig.syncedEntry(
-				entryBuilder.startBooleanToggle(text("tree_generation"), modifiedConfig.treeGeneration)
-					.setDefaultValue(defaultConfig.treeGeneration)
-					.setSaveConsumer(newValue -> config.treeGeneration = newValue)
-					.setTooltip(tooltip("tree_generation"))
+				entryBuilder.startBooleanToggle(text("modified_vanilla_trees"), modifiedConfig.modifiedVanillaTrees)
+					.setDefaultValue(defaultConfig.modifiedVanillaTrees)
+					.setSaveConsumer(newValue -> config.modifiedVanillaTrees = newValue)
+					.setTooltip(tooltip("modified_vanilla_trees"))
 					.requireRestart()
 					.build(),
 				clazz,
-				"treeGeneration",
+				"modifiedVanillaTrees",
+				configInstance
+			)
+		);
+
+		var wilderWildTrees = category.addEntry(
+			FrozenClothConfig.syncedEntry(
+				entryBuilder.startBooleanToggle(text("wilder_wild_trees"), modifiedConfig.wilderWildTrees)
+					.setDefaultValue(defaultConfig.wilderWildTrees)
+					.setSaveConsumer(newValue -> config.wilderWildTrees = newValue)
+					.setTooltip(tooltip("wilder_wild_trees"))
+					.requireRestart()
+					.build(),
+				clazz,
+				"wilderWildTrees",
 				configInstance
 			)
 		);
