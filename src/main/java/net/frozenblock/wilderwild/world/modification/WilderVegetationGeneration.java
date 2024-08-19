@@ -39,6 +39,7 @@ public final class WilderVegetationGeneration {
 				(biomeSelectionContext, context) -> {
 				boolean canAdd = true;
 				canAdd = canAdd && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.jungleFlowers);
+				canAdd = canAdd && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_PLAINS) || WorldgenConfig.get().plains.plainsFlowers);
 
 					if (WorldgenConfig.get().flowerGeneration && canAdd) {
 						BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();

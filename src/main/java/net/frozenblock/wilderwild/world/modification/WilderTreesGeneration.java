@@ -314,16 +314,21 @@ public final class WilderTreesGeneration {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SHORT_SPRUCE_PLACED.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_BIG_COARSE_SHRUB)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.BIG_SHRUB.getKey());
-						}
+						boolean canAddShrubs = true;
+						canAddShrubs = canAddShrubs && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_PLAINS) && !WorldgenConfig.get().plains.plainsTrees);
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_FOREST_SHRUB)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SHRUBS_FOREST.getKey());
-						}
+						if (canAddShrubs) {
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_BIG_COARSE_SHRUB)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.BIG_SHRUB.getKey());
+							}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_SHRUB)) {
-							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SHRUBS.getKey());
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_FOREST_SHRUB)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SHRUBS_FOREST.getKey());
+							}
+
+							if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_SHRUB)) {
+								generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SHRUBS.getKey());
+							}
 						}
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_SHORT_MEGA_SPRUCE)) {

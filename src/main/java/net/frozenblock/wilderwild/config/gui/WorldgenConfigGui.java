@@ -380,6 +380,39 @@ public final class WorldgenConfigGui {
 			snowyDyingForest, snowyDyingMixedForest, sparseBirchJungle, temperateRainforest, warmBeach, warmRiver
 		);
 
+		var plains = config.plains;
+		var modifiedPlains = modifiedConfig.plains;
+
+		var plainsTrees = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("tree_generation"), modifiedPlains.plainsTrees)
+				.setDefaultValue(defaultConfig.plains.plainsTrees)
+				.setSaveConsumer(newValue -> plains.plainsTrees = newValue)
+				.setTooltip(tooltip("tree_generation"))
+				.requireRestart()
+				.build(),
+			plains.getClass(),
+			"plainsBushes",
+			configInstance
+		);
+
+		var plainsFlowers = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("flower_generation"), modifiedPlains.plainsFlowers)
+				.setDefaultValue(defaultConfig.plains.plainsFlowers)
+				.setSaveConsumer(newValue -> plains.plainsFlowers = newValue)
+				.setTooltip(tooltip("flower_generation"))
+				.requireRestart()
+				.build(),
+			plains.getClass(),
+			"plainsFlowers",
+			configInstance
+		);
+
+		var plainsCategory = FrozenClothConfig.createSubCategory(entryBuilder, category, text("plains"),
+			false,
+			tooltip("plains"),
+			plainsTrees, plainsFlowers
+		);
+
 		var jungle = config.jungle;
 		var modifiedJungle = modifiedConfig.jungle;
 

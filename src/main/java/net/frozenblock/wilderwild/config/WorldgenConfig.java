@@ -56,6 +56,8 @@ public final class WorldgenConfig {
 	);
 
 	@CollapsibleObject
+	public final Plains plains = new Plains();
+	@CollapsibleObject
 	public final Jungle jungle = new Jungle();
 
 	@CollapsibleObject
@@ -160,6 +162,13 @@ public final class WorldgenConfig {
 		public boolean jungleMoss = true;
 		@EntrySyncData("jungleFireflies")
 		public boolean jungleFireflies = true;
+	}
+
+	public static class Plains {
+		@EntrySyncData("plainsTrees")
+		public boolean plainsTrees = true;
+		@EntrySyncData("plainsFlowers")
+		public boolean plainsFlowers = true;
 	}
 
 	public static class BiomePlacement {
