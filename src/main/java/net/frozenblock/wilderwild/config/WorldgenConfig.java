@@ -150,6 +150,12 @@ public final class WorldgenConfig {
 		public boolean jungleFallenTrees = true;
 		@EntrySyncData("jungleFlowers")
 		public boolean jungleFlowers = true;
+		@EntrySyncData("jungleBushes")
+		public boolean jungleBushes = true;
+		@EntrySyncData("junglePonds")
+		public boolean junglePonds = true;
+		@EntrySyncData("jungleMoss")
+		public boolean jungleMoss = true;
 		@EntrySyncData("jungleFireflies")
 		public boolean jungleFireflies = true;
 	}

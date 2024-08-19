@@ -432,6 +432,42 @@ public final class WorldgenConfigGui {
 			configInstance
 		);
 
+		var jungleBushes = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("jungle_bushes"), modifiedJungle.jungleBushes)
+				.setDefaultValue(defaultConfig.jungle.jungleBushes)
+				.setSaveConsumer(newValue -> jungle.jungleBushes = newValue)
+				.setTooltip(tooltip("jungle_bushes"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"jungleBushes",
+			configInstance
+		);
+
+		var junglePonds = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("jungle_ponds"), modifiedJungle.junglePonds)
+				.setDefaultValue(defaultConfig.jungle.junglePonds)
+				.setSaveConsumer(newValue -> jungle.junglePonds = newValue)
+				.setTooltip(tooltip("jungle_ponds"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"junglePonds",
+			configInstance
+		);
+
+		var jungleMoss = FrozenClothConfig.syncedEntry(
+			entryBuilder.startBooleanToggle(text("jungle_moss"), modifiedJungle.jungleMoss)
+				.setDefaultValue(defaultConfig.jungle.jungleMoss)
+				.setSaveConsumer(newValue -> jungle.jungleMoss = newValue)
+				.setTooltip(tooltip("jungle_moss"))
+				.requireRestart()
+				.build(),
+			jungle.getClass(),
+			"jungleMoss",
+			configInstance
+		);
+
 		var jungleFireflies = FrozenClothConfig.syncedEntry(
 			entryBuilder.startBooleanToggle(text("jungle_fireflies"), modifiedJungle.jungleFireflies)
 				.setDefaultValue(defaultConfig.jungle.jungleFireflies)
@@ -447,7 +483,7 @@ public final class WorldgenConfigGui {
 		var jungleCategory = FrozenClothConfig.createSubCategory(entryBuilder, category, text("jungle"),
 			false,
 			tooltip("jungle"),
-			modifyJunglePlacement, junglePalms, jungleFallenTrees, jungleFlowers, jungleFireflies
+			modifyJunglePlacement, junglePalms, jungleFallenTrees, jungleFlowers, jungleBushes, junglePonds, jungleMoss, jungleFireflies
 		);
 
 		var cherryGrove = FrozenClothConfig.syncedEntry(

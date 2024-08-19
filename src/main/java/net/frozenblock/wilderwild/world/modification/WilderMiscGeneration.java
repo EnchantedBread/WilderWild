@@ -22,6 +22,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.frozenblock.lib.worldgen.biome.api.modifications.FrozenBiomeSelectors;
 import net.frozenblock.wilderwild.WilderConstants;
 import net.frozenblock.wilderwild.config.WorldgenConfig;
@@ -99,7 +100,10 @@ public final class WilderMiscGeneration {
 							generationSettings.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, WilderMiscPlaced.COARSE_PATH.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_PATH)) {
+						boolean canAddMoss = true;
+						canAddMoss = canAddMoss && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.jungleMoss);
+
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_PATH) && canAddMoss) {
 							generationSettings.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, WilderMiscPlaced.MOSS_PATH.getKey());
 						}
 
@@ -151,27 +155,30 @@ public final class WilderMiscGeneration {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SMALL_SPONGES_RARE.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_LAKE)) {
+						boolean canAddPonds = true;
+						canAddPonds = canAddPonds && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.junglePonds);
+
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_LAKE) && canAddPonds && canAddMoss) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.MOSS_LAKE.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_LAKE_RARE)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_LAKE_RARE) && canAddPonds && canAddMoss) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.MOSS_LAKE_RARE.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_BASIN)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_BASIN) && canAddPonds && canAddMoss) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.BASIN_MOSS.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_PODZOL_BASIN)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_PODZOL_BASIN) && canAddPonds) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.BASIN_PODZOL.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_CARPET)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_CARPET) && canAddMoss) {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.MOSS_CARPET.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_PILE)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MOSS_PILE) && canAddMoss) {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderMiscPlaced.MOSS_PILE.getKey());
 						}
 
@@ -179,11 +186,11 @@ public final class WilderMiscGeneration {
 							generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderMiscPlaced.MUD_PILE.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MUD_BASIN)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MUD_BASIN) && canAddPonds) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.BASIN_MUD.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MUD_LAKE)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_MUD_LAKE) && canAddPonds) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.MUD_LAKE.getKey());
 						}
 
@@ -223,11 +230,11 @@ public final class WilderMiscGeneration {
 							generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, WilderMiscPlaced.ROOTED_DIRT_PATH_CLEARING.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_WATER_POOLS)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_WATER_POOLS) && canAddPonds) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.RIVER_POOL.getKey());
 						}
 
-						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_WATER_POOLS)) {
+						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_WATER_POOLS) && canAddPonds) {
 							generationSettings.addFeature(GenerationStep.Decoration.LAKES, WilderMiscPlaced.SMALL_RIVER_POOL.getKey());
 						}
 

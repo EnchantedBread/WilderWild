@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "wilderwild:baobab",
+    "features": [
+      {
+        "chance": 0.62,
+        "feature": "wilderwild:baobab"
+      },
+      {
+        "chance": 0.35,
+        "feature": "wilderwild:baobab_tall"
+      }
+    ]
+  }
+}

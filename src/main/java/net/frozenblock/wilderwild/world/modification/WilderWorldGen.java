@@ -251,10 +251,17 @@ public final class WilderWorldGen {
 				ModificationPhase.REPLACEMENTS,
 				BiomeSelectors.tag(WilderBiomeTags.NORMAL_SAVANNA),
 				context -> {
-					if (WorldgenConfig.get().modifiedVanillaTrees) {
-						BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
+					boolean vanillaTrees = WorldgenConfig.get().modifiedVanillaTrees;
+					boolean wilderTrees = WorldgenConfig.get().wilderWildTrees;
+					BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
+					if (wilderTrees && !vanillaTrees) {
+						generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SAVANNA_TREES_ONLY_BAOBAB.getKey());
+					} else if (wilderTrees && vanillaTrees) {
 						generationSettings.removeFeature(VegetationPlacements.TREES_SAVANNA);
 						generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SAVANNA_TREES.getKey());
+					} else if (!wilderTrees && vanillaTrees) {
+						generationSettings.removeFeature(VegetationPlacements.TREES_SAVANNA);
+						generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.SAVANNA_TREES_NO_BAOBAB.getKey());
 					}
 				})
 			.add(
@@ -271,8 +278,13 @@ public final class WilderWorldGen {
 				ModificationPhase.REPLACEMENTS,
 				BiomeSelectors.includeByKey(RegisterWorldgen.ARID_SAVANNA),
 				context -> {
-					if (WorldgenConfig.get().wilderWildTrees) {
-						BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
+					boolean vanillaTrees = WorldgenConfig.get().modifiedVanillaTrees;
+					boolean wilderTrees = WorldgenConfig.get().wilderWildTrees;
+					BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
+
+					if (wilderTrees && !vanillaTrees) {
+						generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.ARID_SAVANNA_TREES_ONLY_NON_VANILLA.getKey());
+					} else if (wilderTrees && vanillaTrees) {
 						generationSettings.removeFeature(WilderPlacedFeatures.ARID_SAVANNA_TREES_VANILLA.getKey());
 						generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WilderPlacedFeatures.ARID_SAVANNA_TREES.getKey());
 					}

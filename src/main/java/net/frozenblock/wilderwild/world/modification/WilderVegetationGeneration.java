@@ -164,7 +164,10 @@ public final class WilderVegetationGeneration {
 			.add(ModificationPhase.ADDITIONS,
 				BiomeSelectors.all(),
 				(biomeSelectionContext, context) -> {
-					if (WorldgenConfig.get().bushGeneration) {
+				boolean canAdd = true;
+				canAdd = canAdd && (!biomeSelectionContext.hasTag(ConventionalBiomeTags.IS_JUNGLE) || WorldgenConfig.get().jungle.jungleBushes);
+
+					if (WorldgenConfig.get().bushGeneration && canAdd) {
 						BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
 						if (biomeSelectionContext.hasTag(WilderBiomeTags.HAS_BUSH)) {
