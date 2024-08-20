@@ -600,7 +600,7 @@ public final class WilderMiscConfigured {
 				true,
 				BlockStateProvider.simple(RegisterBlocks.SCORCHED_SAND.defaultBlockState().setValue(RegisterProperties.CRACKED, true)),
 				BlockStateProvider.simple(RegisterBlocks.SCORCHED_SAND.defaultBlockState()),
-				UniformInt.of(12, 24),
+				UniformInt.of(24, 96),
 				0.95F,
 				0.875F,
 				0.65F,
